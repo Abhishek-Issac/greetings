@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CML BATHERY SHAKHA</title>
+    <style>
+        /* --- BASE SETTINGS --- */
+        :root {
+            --bg-color: #fdfbf7;
+            --text-main: #2c1e16;
+            --text-muted: #5c4a3d;
+            --gold: #c5a017;
+            --navy: #1a1f2e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #eaddc4;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* --- MOBILE-FIRST CONTAINER --- */
+        .app-container {
+            background: linear-gradient(180deg, #ffffff 0%, var(--bg-color) 100%);
+            width: 100%;
+            max-width: 480px; 
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* --- HEADER --- */
+        .header {
+            margin-bottom: 20px;
+        }
+        .church-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--navy);
+            letter-spacing: 1px;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+        .church-name span {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .badge {
+            display: inline-block;
+            background-color: var(--navy);
+            color: var(--gold);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        /* --- MEDIA SECTION (Video ONLY now) --- */
+        .media-section {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        #video-wrapper {
+            position: relative; 
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+            overflow: hidden;
+            background-color: #000;
+            aspect-ratio: 9/16; 
+        }
+
+        video {
+            width: 100%;
+            display: block;
+        }
+
+        /* The Custom Play Button Overlay (Hidden by default, shown if browser blocks autoplay) */
+        .play-overlay {
+            display: none; /* Hidden at first while we try to autoplay */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: 2px solid var(--gold);
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            font-family: inherit;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            transition: background-color 0.2s, transform 0.2s;
+            backdrop-filter: blur(4px);
+        }
+        
+        .play-overlay:active {
+            background-color: rgba(0, 0, 0, 0.9);
+            transform: translate(-50%, -50%) scale(0.95);
+        }
+
+        /* --- LANGUAGE SELECTOR --- */
+        .language-selector {
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+        .lang-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 15px;
+            cursor: pointer;
+            padding: 5px 10px;
+            transition: color 0.3s ease;
+            font-family: inherit;
+        }
+        .lang-btn.active {
+            color: var(--navy);
+            font-weight: bold;
+        }
+        .divider {
+            color: #ccc;
+        }
+
+        /* --- GREETING TEXT --- */
+        .greeting-box {
+            margin-bottom: 30px;
+            padding: 0 10px;
+        }
+        .greeting-box h2 {
+            font-size: 22px;
+            color: var(--navy);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .greeting-box p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-main);
+        }
+
+        /* --- HYPERLINK BUTTON SECTION --- */
+        .link-button-section {
+            width: 100%;
+            margin-top: 10px; 
+            margin-bottom: 30px;
+        }
+        
+        .action-link {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold) 0%, #a88712 100%);
+            color: #fff;
+            text-decoration: none;
+            padding: 16px 24px;
+            width: 100%;
+            border-radius: 8px; 
+            font-size: 15px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(197, 160, 23, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .action-link:active {
+            transform: scale(0.98);
+        }
+
+        /* --- UTILITIES --- */
+        .hidden {
+            display: none !important;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="app-container">
+        
+        <header class="header">
+            <h1 class="church-name">ASSUMPTION FORANE CHURCH<br><span>SULTHAN BATHERY</span></h1>
+            <div class="badge">✦ CML BATHERY SHAKHA ✦</div>
+        </header>
+
+        <!-- Cinematic Video Section -->
+        <section class="media-section" id="media-container">
+            <div id="video-wrapper">
+                <!-- Autoplay is set, Muted is removed. Browser will attempt to play it loud. -->
+                <video id="welcome-video" playsinline autoplay>
+                    <source src="assets/jesus-welcome.mp4" type="video/mp4">
+                    Your browser does not support the video.
+                </video>
+                
+                <!-- Smart Fallback Play Button -->
+                <button id="custom-play-btn" class="play-overlay">▶ PLAY</button>
+            </div>
+        </section>
+
+        <!-- Language Selection -->
+        <div class="language-selector">
+            <button id="btn-ml" class="lang-btn" aria-label="Switch to Malayalam">മലയാളം</button>
+            <span class="divider">|</span>
+            <button id="btn-en" class="lang-btn active" aria-label="Switch to English">English</button>
+        </div>
+
+        <!-- English Greeting -->
+        <section id="greeting-en" class="greeting-box fade-in">
+            <h2>Hello! Welcome to Assumption Forane Church, Sulthan Bathery!</h2>
+            <p>Heartfelt wishes and prayers to all the contestants as talent and imagination take centre stage.</p>
+        </section>
+
+        <!-- Malayalam Greeting -->
+        <section id="greeting-ml" class="greeting-box hidden">
+            <h2>നമസ്കാരം! അസംപ്ഷൻ ഫൊറോന പള്ളിയിലേക്ക് സ്വാഗതം!</h2>
+            <p>പ്രതിഭയും ഭാവനയും മാറ്റുരയ്ക്കുന്ന ഈ മനോഹര മുഹൂർത്തത്തിൽ എല്ലാ പ്രിയ മത്സരാർത്ഥികൾക്കും ഹൃദയം നിറഞ്ഞ ആശംസകൾ... പ്രാർത്ഥനകൾ...</p>
+        </section>
+
+        <!-- Detached Hyperlink Button -->
+        <section class="link-button-section">
+            <!-- PASTE YOUR PUBLISHED WEBSITE LINK BELOW (replace the https://... part) -->
+            <a href="https://www.your-external-website.com" target="_blank" class="action-link">▶ CONTINUE TO YOUTH FIRST</a>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // --- LANGUAGE SWITCHING LOGIC ---
+            const btnEn = document.getElementById("btn-en");
+            const btnMl = document.getElementById("btn-ml");
+            const greetingEn = document.getElementById("greeting-en");
+            const greetingMl = document.getElementById("greeting-ml");
+
+            btnEn.addEventListener("click", () => {
+                btnEn.classList.add("active");
+                btnMl.classList.remove("active");
+                greetingEn.classList.remove("hidden");
+                greetingEn.classList.add("fade-in");
+                greetingMl.classList.add("hidden");
+                document.documentElement.lang = "en";
+            });
+
+            btnMl.addEventListener("click", () => {
+                btnMl.classList.add("active");
+                btnEn.classList.remove("active");
+                greetingMl.classList.remove("hidden");
+                greetingMl.classList.add("fade-in");
+                greetingEn.classList.add("hidden");
+                document.documentElement.lang = "ml";
+            });
+
+            // --- SMART AUTOPLAY & SOUND LOGIC ---
+            const videoElement = document.getElementById("welcome-video");
+            const customPlayBtn = document.getElementById("custom-play-btn");
+
+            // We try to force the browser to play it with sound immediately
+            let playPromise = videoElement.play();
+
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    // Success! The phone allowed it to autoplay out loud.
+                    customPlayBtn.style.display = "none";
+                }).catch(error => {
+                    // Blocked! The phone security stopped the loud video.
+                    // We instantly show the Play button so the user can tap it.
+                    console.log("Browser blocked loud autoplay. Showing play button.");
+                    customPlayBtn.style.display = "block";
+                });
+            }
+
+            // When they click the fallback play button, the video plays at full volume
+            customPlayBtn.addEventListener("click", () => {
+                videoElement.play();
+                // Hide the button once the video starts
+                customPlayBtn.style.display = "none"; 
+            });
+        });
+    </script>
+</body>
+</html>

@@ -210,8 +210,8 @@
         <!-- Cinematic Video Section -->
         <section class="media-section" id="media-container">
             <div id="video-wrapper">
-                <!-- Muted autoplay is allowed by modern browsers; users can enable sound after tapping. -->
-                <video id="welcome-video" playsinline autoplay muted preload="metadata" controls>
+                <!-- Audible autoplay is attempted; browsers may require the user to tap PLAY. -->
+                <video id="welcome-video" playsinline autoplay preload="metadata" controls>
                     <source src="assets/jesus-welcome.mp4" type="video/mp4">
                     Your browser does not support the video.
                 </video>
@@ -279,8 +279,7 @@
             const videoElement = document.getElementById("welcome-video");
             const customPlayBtn = document.getElementById("custom-play-btn");
 
-            // Muted autoplay is broadly supported. Sound can be enabled from the controls
-            // after the user interacts with the page.
+            // Audible autoplay is attempted, but browsers may require a user tap.
             const showPlayButton = () => {
                 customPlayBtn.style.display = "block";
             };

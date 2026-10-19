@@ -210,8 +210,8 @@
         <!-- Cinematic Video Section -->
         <section class="media-section" id="media-container">
             <div id="video-wrapper">
-                <!-- Autoplay is set, Muted is removed. Browser will attempt to play it loud. -->
-                <video id="welcome-video" playsinline autoplay>
+                <!-- Muted autoplay is allowed by modern browsers; users can enable sound after tapping. -->
+                <video id="welcome-video" playsinline autoplay muted preload="metadata" controls>
                     <source src="assets/jesus-welcome.mp4" type="video/mp4">
                     Your browser does not support the video.
                 </video>
@@ -279,27 +279,28 @@
             const videoElement = document.getElementById("welcome-video");
             const customPlayBtn = document.getElementById("custom-play-btn");
 
-            // We try to force the browser to play it with sound immediately
+            // Muted autoplay is broadly supported. Sound can be enabled from the controls
+            // after the user interacts with the page.
+            const showPlayButton = () => {
+                customPlayBtn.style.display = "block";
+            };
+
             let playPromise = videoElement.play();
 
             if (playPromise !== undefined) {
                 playPromise.then(() => {
-                    // Success! The phone allowed it to autoplay out loud.
                     customPlayBtn.style.display = "none";
-                }).catch(error => {
-                    // Blocked! The phone security stopped the loud video.
-                    // We instantly show the Play button so the user can tap it.
-                    console.log("Browser blocked loud autoplay. Showing play button.");
-                    customPlayBtn.style.display = "block";
-                });
+                }).catch(showPlayButton);
             }
 
-            // When they click the fallback play button, the video plays at full volume
             customPlayBtn.addEventListener("click", () => {
-                videoElement.play();
-                // Hide the button once the video starts
-                customPlayBtn.style.display = "none"; 
+                videoElement.muted = false;
+                videoElement.play()
+                    .then(() => { customPlayBtn.style.display = "none"; })
+                    .catch(showPlayButton);
             });
+
+            videoElement.addEventListener("error", showPlayButton);
         });
     </script>
 </body>
